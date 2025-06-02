@@ -3,11 +3,11 @@
   become: yes 
   tasks:
   - name: copy mongodb repo
-    ansbile.builtin.copy:
+    copy:
       src: mongodb.repo
       dest: /etc/yum.repos.d/mongo.repo
 
   - name: install mongodb server
-    ansbile.builtin.dnf: 
+    dnf: 
       name: mongodb-org
       state: installed
