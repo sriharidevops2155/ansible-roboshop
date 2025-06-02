@@ -11,3 +11,9 @@
     dnf: 
       name: mongodb-org
       state: installed
+
+  - name: Start and enable mongo db 
+    ansible.builtin.service:
+      name: mongod
+      state: started
+      enabled: yes
