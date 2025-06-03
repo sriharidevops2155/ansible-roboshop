@@ -36,5 +36,26 @@
       src: /tmp/catalogue.zip
       dest: /app
       remote_src: yes  # File already exist in catalogue server 
+
+  - name: Install dependencies 
+    community.general.npm:
+      path: /app
+
+  - name: copy catalogue service to system directory
+    copy:
+      src: catalogue.service
+      dest: /etc/systemd/system/catalogue.service
+
+  - name: systemctl daemon reload
+    systemd_service:
+      daemon_reload: true
+  
+  - name: Start and enable catalogue
+    service: 
+      name: catalogue
+      state: started
+      enabled: yes 
+  
+
   
 
