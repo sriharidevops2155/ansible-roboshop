@@ -54,8 +54,23 @@
     service: 
       name: catalogue
       state: started
-      enabled: yes 
+      enabled: yes
   
+  - name: copy mongodb repo to 
+    copy:
+      src: catalogue.service
+      dest: /etc/systemd/system/catalogue.service
 
-  
+  - name: copy mongodb repo
+    copy:
+      src: mongodb.repo
+      dest: /etc/yum.repos.d/mongo.repo
+
+  - name: install mongodb server
+    dnf: 
+      name: mongodb-mongosh
+      state: present
+
+
+
 
