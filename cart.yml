@@ -1,5 +1,5 @@
 - name: Configure cart component 
-  hosts: user
+  hosts: cart
   become: yes 
   tasks: 
   - name: disable default node js 
@@ -13,7 +13,7 @@
       name: nodejs
       state: installed
   
-  - name: Create roboshop system user 
+  - name: Create roboshop system cart 
     user: 
       name: roboshop
       shell: /sbin/nologin
@@ -25,13 +25,13 @@
       path: /app 
       state: directory
 
-  - name: Download the user code 
+  - name: Download the cart code 
     get_url:
       url: https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip 
-      dest: /tmp/user.zip
+      dest: /tmp/cart.zip
     
  # This module thinks file exist on ansible control server, need to extract on to remote machine 
-  - name: Extract user code 
+  - name: Extract cart code 
     unarchive:
       src: /tmp/cart.zip
       dest: /app
@@ -43,16 +43,16 @@
 
   - name: copy cart service to system directory
     copy:
-      src: user.service
-      dest: /etc/systemd/system/user.service
+      src: cart.service
+      dest: /etc/systemd/system/cart.service
 
   - name: systemctl daemon reload
     systemd_service:
       daemon_reload: true
   
-  - name: Start and enable user
+  - name: Start and enable cart
     service: 
-      name: user
+      name: cart
       state: started
       enabled: yes
   
