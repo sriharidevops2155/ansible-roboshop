@@ -69,6 +69,6 @@
       community.mysql.mysql_info:
         login_user: shipping
         login_password: RoboShop@1
-        login_host: mysql.daws84s.site
+        login_host: mysql.daws84s.cloud
         login_db: cities 
       
