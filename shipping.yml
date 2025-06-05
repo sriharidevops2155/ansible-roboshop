@@ -89,6 +89,8 @@
         - /app/db/master-data.sql
       
     - name: restart shipping
+      tags:
+        - import
       service:
         name: shipping
         state: restarted
