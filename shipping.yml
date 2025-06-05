@@ -1,0 +1,15 @@
+- name: Configure shipping component 
+  hosts: shipping
+  become: yes 
+  tasks:
+    - name: install maven
+      dnf:
+        name: maven
+        state: installed 
+
+    - name: Create a system user 
+      user:
+        name: roboshop
+        shell: /sbin/nologin
+        system: true 
+        home: /app
