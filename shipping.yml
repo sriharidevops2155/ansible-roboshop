@@ -13,3 +13,44 @@
         shell: /sbin/nologin
         system: true 
         home: /app
+
+    - name: Create app directory 
+      file: 
+        path: /app 
+        state: directory
+
+    - name: Download the shipping code 
+      get_url:
+        url: https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip 
+        dest: /tmp/shipping.zip
+
+    - name: Extract shipping code 
+      unarchive:
+        src: /tmp/shipping.zip
+        dest: /app
+        remote_src: yes
+
+    - name: install maven dependencies
+      command: mvn clean package
+      args:
+        chdir: /app 
+    
+    - name: rename jar file 
+      command: mv target/shipping-1.0.jar shipping.jar
+      args:
+        chdir: /app 
+  
+    - name: copy shipping service 
+      copy: 
+        src: shipping.service
+        dest: /etc/systemd/system/shipping.service
+    
+    - name: daemon reload
+      systemd_service:
+      daemon_reload: true
+
+    - name: enable and start shipping service 
+      service:
+        name: shipping 
+        state: started 
+        enabled: yes 
