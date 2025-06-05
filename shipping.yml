@@ -47,10 +47,23 @@
     
     - name: daemon reload
       systemd_service:
-      daemon_reload: true
+        daemon_reload: true
 
     - name: enable and start shipping service 
       service:
         name: shipping 
         state: started 
         enabled: yes 
+
+    - name: Install sql client load schema 
+      dnf: 
+        name: mysql 
+        state: installed 
+      
+    - name: connect to mysql using app user
+      community.mysql.mysql.info:
+        login_user: shipping
+        login_password: RoboShop@1
+        login_host: mysql.daws84s.site
+        login_db: cities 
+      
