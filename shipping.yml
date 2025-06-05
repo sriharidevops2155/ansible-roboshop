@@ -4,11 +4,13 @@
   tasks:
     - name: install maven
       dnf:
-        name: "{{ item }}"
+        name: maven
         state: installed 
-      loop:
-        - maven
-        - PyMySQL
+
+    - name: Install PyMySQL 
+      pip:
+        name: PyMySQL
+        executable: pip3.9
 
     - name: Create a system user 
       user:
