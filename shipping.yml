@@ -4,8 +4,12 @@
   tasks:
     - name: install maven
       dnf:
-        name: maven
+        name: "{{ item }}"
         state: installed 
+      loop:
+        - maven
+        - cryptography
+        - mysql
 
     - name: Install PyMySQL 
       pip:
@@ -58,12 +62,7 @@
       service:
         name: shipping 
         state: started 
-        enabled: yes 
-
-    - name: Install sql client load schema 
-      dnf: 
-        name: mysql 
-        state: installed 
+        enabled: yes
       
     - name: connect to mysql using app user
       community.mysql.mysql_info:
