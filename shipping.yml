@@ -4,8 +4,11 @@
   tasks:
     - name: install maven
       dnf:
-        name: maven
+        name: "{{ item }}"
         state: installed 
+      loop:
+        - maven
+        - PyMySQL
 
     - name: Create a system user 
       user:
