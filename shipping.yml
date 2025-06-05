@@ -66,10 +66,27 @@
         state: started 
         enabled: yes
       
-    - name: connect to mysql using app user
-      community.mysql.mysql_info:
+    # - name: connect to mysql using app user
+    #   community.mysql.mysql_info:
+    #     login_user: shipping
+    #     login_password: RoboShop@1
+    #     login_host: mysql.daws84s.cloud
+    #     login_db: cities 
+    
+    - name: 
+      community.mysql.mysql_db:
         login_user: shipping
         login_password: RoboShop@1
         login_host: mysql.daws84s.cloud
-        login_db: cities 
+        state: import 
+        target: "{{ item }}"
+      loop: 
+        - /app/db/schema.sql
+        - /app/db/app-user.sql 
+        - /app/db/master-data.sql
       
+    - name: restart shipping
+      service:
+        name: shipping
+        state: restarted
+
