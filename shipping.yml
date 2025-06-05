@@ -92,6 +92,6 @@
       tags:
         - import
       service:
-        name: shipping
+        name: shipping 
         state: restarted
 
