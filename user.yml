@@ -35,7 +35,7 @@
     unarchive:
       src: /tmp/user.zip
       dest: /app
-      remote_src: yes  # File already exist in catalogue server 
+      remote_src: yes  # File already exist in catalogue server since we added this file in remote server.
 
   - name: Install dependencies 
     community.general.npm:

@@ -31,6 +31,7 @@
       dest: /tmp/catalogue.zip
     
  # This module thinks file exist on ansible control server, need to extract on to remote machine 
+ # remote_src: yes means files already exist in catalogue server
   - name: Extract catalogue code 
     unarchive:
       src: /tmp/catalogue.zip
@@ -75,9 +76,5 @@
       msg: "{{ catalogue_output }}"
 
   - name: load products
-    ansible.builtin.shell: mongosh --host mongodb.daws84s.cloud < /app/db/master-data.js
+    ansible.builtin.shell: mongosh --host mongodb.daws84s.cloud < /app/db/master-data.js  # here we have to use shell module instead of command module just for firing the special character < 
     when: catalogue_output.stdout | int < 0
-
-
-
-

@@ -7,6 +7,9 @@
   
   - name: 
     command: dnf module enable nginx:1.24 -y
+
+#  - name: 
+#    command:  dnf module disable nginx -y ; dnf module enable nginx:1.24 -y
   
   - name: install nginx 
     dnf: 
@@ -40,7 +43,7 @@
       dest: /usr/share/nginx/html
       remote_src: yes 
   
-  - name: remove existing nginx .conf  
+  - name: remove existing nginx.conf  
     file:
       path: /etc/nginx/nginx.conf
       state: absent

@@ -22,8 +22,8 @@
     - name: Update protected-mode from yes to no in /etc/redis/redis.Configure
       lineinfile:
         path: /etc/redis/redis.conf
-        regexp: "protected-mode"
-        line: "protected-mode no" 
+        regexp: 'protected-mode'   # if any line contains 'protected-mode'
+        line: 'protected-mode no' 
 
     - name: enable and start redis 
       service: 
