@@ -89,7 +89,7 @@
         - /app/db/master-data.sql
 
 # ansible-playbook -i inventory.ini -e anbile_user=ec2-user -e ansible_password=DEVOPS321 shipping.yml -t import {i.e -t i run the tag specified task from playbook}
-      
+
     - name: restart shipping
       tags:
         - import
